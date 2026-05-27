@@ -1,0 +1,205 @@
+/* --- Основные переменные для цветов --- */
+:root {
+    --primary-blue: #007bff; /* Яркий синий */
+    --dark-blue: #0056b3;    /* Темно-синий для ховера/активных элементов */
+    --light-blue: #eaf6ff;   /* Очень светлый синий для фона или акцентов */
+    --text-dark: #333;       /* Темный текст */
+    --text-light: #555;      /* Светлее текст */
+    --background-grey: #f8f8f8; /* Очень светлый серый фон */
+    --white: #fff;
+    --border-color: #ddd;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+}
+
+/* --- Общие стили и сброс --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Можно подключить Roboto из Google Fonts */
+    line-height: 1.6;
+        color: var(--text-dark);
+        background-color: var(--background-grey);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+        color: var(--primary-blue);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: var(--dark-blue);
+        text-decoration: underline;
+    }
+
+    / --- Контейнер для центрирования контента --- /
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    / --- Header --- /
+    header {
+        background-color: var(--primary-blue);
+        color: var(--white);
+        padding: 20px 0;
+        box-shadow: 0 2px 5px var(--shadow-light);
+    }
+
+    header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header h1 {
+        font-size: 2em;
+        margin: 0;
+    }
+
+    header nav ul {
+        list-style: none;
+        display: flex;
+    }
+
+    header nav ul li {
+        margin-left: 20px;
+    }
+
+    header nav ul li a {
+        color: var(--white);
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    header nav ul li a:hover {
+        text-decoration: underline;
+        color: var(--light-blue);
+    }
+
+    / --- Main content area --- /
+    main {
+        padding: 40px 0;
+    }
+
+    / --- Секция "Новые лоты" --- /
+    .new-lots-section {
+        background-color: var(--white);
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px var(--shadow-light);
+        margin-bottom: 40px;
+    }
+
+    .new-lots-section h2 {
+        color: var(--primary-blue);
+        text-align: center;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+
+    .lots-container {
+        display: grid;
+        /* Адаптивная сетка:
+           - auto-fit: автоматически подстраивает количество колонок
+           - minmax(280px, 1fr): каждая колонка не меньше 280px, но занимает всю доступную ширину */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px; / Расстояние между лотами /
+    }
+
+    .lot {
+        background-color: var(--white);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        overflow: hidden; / Обрезаем, если изображение выходит за края /
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .lot:hover {
+        transform: translateY(-5px); / Легкий эффект поднятия при наведении /
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .lot img {
+        width: 100%;
+        height: 200px; / Фиксированная высота для изображений /
+        object-fit: cover; / Обрезает изображение, чтобы оно заполнило контейнер /
+        display: block;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .lot h3 {
+        font-size: 1.5em;
+        margin: 15px 10px 5px;
+        min-height: 50px; / Для выравнивания заголовков, если они разной длины /
+    }
+
+    .lot h3 a {
+        color: var(--text-dark); / Цвет ссылки на заголовок лота /
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .lot h3 a:hover {
+        color: var(--primary-blue);
+        text-decoration: underline;
+    }
+
+    .lot p {
+        color: var(--text-light);
+        margin-bottom: 10px;
+        padding: 0 10px;
+    }
+
+    / --- Кнопка "Подробнее" --- /
+    .btn-details {
+        display: inline-block;
+        background-color: var(--primary-blue);
+        color: var(--white);
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-decoration: none; / Убираем подчеркивание для кнопки /
+        }
+
+        .btn-details:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-2px);
+            text-decoration: none; / Убедимся, что подчеркивание не появляется при ховере /
+        }
+
+        / --- Сообщение "Новых лотов пока нет" --- /
+        .lots-container p {
+            grid-column: 1 / -1; / Чтобы сообщение занимало всю ширину сетки /
+            text-align: center;
+            font-style: italic;
+            color: var(--text-light);
+            padding: 30px;
+            font-size: 1.2em;
+        }
+
+        / --- Footer --- /
+        footer {
+            background-color: var(--dark-blue); / Темно-синий для футера /
+            color: var(--white);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9em;
+            box-shadow: 0 -2px 5px var(--shadow-light);
+        }
